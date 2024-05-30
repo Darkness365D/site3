@@ -94,6 +94,7 @@ h1 {
 }
 
 .registration-form {
+  
   max-width: 400px;
   margin: 0 auto;
   padding: 30px;
@@ -122,6 +123,8 @@ h1 {
 
 
 .login-form {
+  display: flex;
+  align-items: center;
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
@@ -223,10 +226,10 @@ button:hover {
 
 }
 .fon {
-  height: 1080px;
-  width: 1920px;
+  /* height: 1080px;
+  width: 1920px; */
   color: #3C3B3B;
-
+  margin: 0;
 }
 
 .search-container {
@@ -253,4 +256,13 @@ button:hover {
   display: flex; /* Делаем контейнер флексбоксом */
   align-items:flex-start; /* Выравниваем элементы по центру по вертикали */
 
+}
+
+.container_for_regAndLog{
+  display: flex; 
+  align-items: center;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 10%;
 }

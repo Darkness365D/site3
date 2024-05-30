@@ -4,22 +4,24 @@
         BanK
         <img src="@/assets/naz2.png" align="center">
       </div>
-  <div class="registration-form">
-    <h1>Login</h1>
-    <form @submit.prevent="login">
-      <div class="form-group">
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" v-model="phoneNumber" id="phoneNumber" required>
+      <div style="padding-bottom: 30%;">
+        <div class="registration-form">
+          <h1>Login</h1>
+          <form @submit.prevent="login">
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number:</label>
+              <input type="text" v-model="phoneNumber" id="phoneNumber" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" v-model="password" id="password" required>
+            </div>
+            <button class="button" type="submit">Login</button>
+          </form>
+          <p v-if="error">{{ error }}</p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" v-model="password" id="password" required>
-      </div>
-      <button class="button" type="submit">Login</button>
-    </form>
-    <p v-if="error">{{ error }}</p>
-  </div>
-</div>
+    </div>
 </template>
 
 <script>

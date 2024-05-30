@@ -1,10 +1,11 @@
 <template>
 <div class="fon" style="background-color: #3C3B3B;" >
   <div class="name_1" align="left">
-        BanK
-        <img src="@/assets/naz2.png" align="center">
-      </div>
-  <div class="registration-form">
+       BanK
+      <img src="@/assets/naz2.png" align="center">
+   </div>
+   <div class="container_for_regAndLog">
+    <div class="registration-form">
     <h1>Регистрация</h1>
     <form @submit.prevent="register">
       <div class="form-group">
@@ -56,6 +57,8 @@
       <button class="button" type="button" @click="navigateToLogin">У меня уже есть аккаунт</button>
     </form>
   </div>
+   </div>
+   
 </div>
 </template>
 
