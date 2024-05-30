@@ -1,0 +1,256 @@
+/* Обнуление отступов и границ у html и body */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #3C3B3B;
+}
+
+.osnovnoe{
+  width: auto;
+  height: auto;
+  background-color: #3C3B3B;
+  top: 0; /* Располагаем его в верхней части страницы */
+  left: 0; /* Располагаем его по левому краю */
+  margin-top: 0;
+}
+
+.bottom-menu {
+  height: 100px;
+  width: auto;
+  background-color: #BDE3FF;
+  margin: 0;
+  position: relative;
+}
+
+.top-menu {
+  height: 100px;
+  width: 100%; /* Ширина 100% */
+  background-color: #BDE3FF;
+  padding: 0;
+  margin: 0; /* Отменяем все внешние отступы */
+  position: fixed; /* Закрепляем меню наверху */
+  top: 0; /* Располагаем его в верхней части страницы */
+  left: 0; /* Располагаем его по левому краю */
+  padding: 0 10px; /* Добавляем паддинг для удобства */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  list-style-type: none;
+  display: flex;
+  margin-left: 45%; /* Расстояние между элементами меню */
+  text-decoration: none;
+  color: #000;
+  font-size: 23px;
+  gap: 40px;
+}
+
+.user-name {
+  display: flex;
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+  margin-right: 2%;
+  font-size: 18px;
+  color: #000;
+}
+
+.user-name img {
+  width: 55px; /* Ширина изображения пользователя */
+  height: 55px; /* Высота изображения пользователя */
+  border-radius: 50%; /* Делаем изображение круглым */
+}
+
+.name {
+  font-size: 32px;
+  color: #000;
+  display: flex; /* Делаем контейнер флексбоксом */
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+  margin-right: 100px;
+  top:50%;
+  display: flex; /* Делаем контейнер флексбоксом */
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+}
+
+.name_1 {
+  font-size: 32px;
+  color:#BDE3FF;
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+  margin-right: 100px;
+  display: flex; /* Делаем контейнер флексбоксом */
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+  padding-left:5% ;
+  padding-top: 1%;
+}
+
+body::before {
+  content: "";
+  display: inline-block;
+  height: 100px; /* Высота равна высоте меню */
+}
+
+h1 {
+  color: #ffffff;
+}
+
+.registration-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #fffefe;
+  border-radius: 20px;
+  background-color:#3C3B3Bf9;
+  margin-top: 3%;
+}
+
+.card-form {
+  margin-top: 5%;
+  margin-left: -2%;
+  width: 300px;
+  height: 150px;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #f9f9f9;
+  display: flex;
+  align-items: flex-start; /* Содержимое контейнера сверху */
+  gap: 0px; /* Расстояние между полями */
+  padding-left: 10px;
+  padding-top: 10px; /* Отступ сверху */
+  color: #ffffff;
+}
+
+
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  background-color: #3C3B3B;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color:#ffffff;
+
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  border-color: #fffefe;
+  background-color: #3C3B3B;
+  border-radius: 10px;
+}
+
+.button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  background-color: #66c1fd;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.logout-button{
+  padding: 10px 15px;
+  margin-right: 60px;
+  margin-top: 30%;
+  background-color: #66c1fd;
+  color: white;
+  border-radius: 5px;
+  border-color: #66c1fd;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.btn1 {
+  margin-right: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  background-color: #BDE3FF;
+  border-color: none;
+  border: none;
+  font-size: 22px;
+}
+.btn2 {
+  margin-right: px;
+  color: #015aff;
+  cursor: pointer;
+  background-color: #BDE3FF;
+  border-color: none;
+  border: none;
+  font-size: 22px;
+}
+
+.btn3 {
+  margin-right: 100px;
+  margin-top: 8%;
+  color: #015aff;
+  cursor: pointer;
+  background-color: #BDE3FF;
+  border-color: none;
+  border: none;
+  font-size: 22px;
+}
+
+.error {
+  color: red;
+}
+
+.text {
+  font-size: 40px;
+  color:#ffffff;
+  margin-left: -70%;
+  font-weight: bold;
+}
+
+.bottonP {
+  margin-right: 0%;
+  color:#ffffff;
+
+}
+.fon {
+  height: 1080px;
+  width: 1920px;
+  color: #3C3B3B;
+
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+  width: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ffffff;
+  background-color: #3C3B3B;
+  border-radius: 15px;
+  margin-left: 400%;
+  margin-top: 1%;
+  color: #fffefe;
+}
+
+.search-results {
+  color: #015aff;
+}
+
+.container {
+  display: flex; /* Делаем контейнер флексбоксом */
+  align-items:flex-start; /* Выравниваем элементы по центру по вертикали */
+
+}
