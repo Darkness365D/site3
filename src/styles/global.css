@@ -317,9 +317,7 @@ button:hover {
   margin: 0;
 }
 
-.search-container {
-  margin-bottom: 20px;
-}
+
 
 .search-container input[type="text"] {
   width: 500%;
@@ -328,7 +326,7 @@ button:hover {
   border: 1px solid #ffffff;
   background-color: #3C3B3B;
   border-radius: 15px;
-  margin-left: 400%;
+  margin-left: 300%;
   margin-top: 30%;
   color: #fffefe;
 }
@@ -354,9 +352,10 @@ button:hover {
 
 .reclama {
   display: flex;
+  align-items: normal;
   margin-top: 25%;
-  margin-left: -53%;
-  margin-right: 37%;
+  margin-left: -45%;
+  
   width: 10px;
   height: 240px;
 }

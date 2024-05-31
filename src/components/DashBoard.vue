@@ -15,14 +15,9 @@
         <img src="@/assets/Frame 11.png" align="center">
       </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div style="padding-top: 150px;">
+
+    </div>
     <div class="text" style="padding-left: 5%" v-if="user">
       {{ greeting }} {{ user.name }}
     </div>
@@ -34,11 +29,9 @@
       <br>
       <br>
       <div class="search-results">
-        <ul>
           <li v-for="(result, index) in filteredResults" :key="index">
             <!-- Отобразите результаты поиска здесь -->
           </li>
-        </ul>
       </div>
 
       <div class="card-form" v-if="user">
