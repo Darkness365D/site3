@@ -6,9 +6,9 @@
         <img src="@/assets/naz.png" align="center">
       </div>
       <nav class="menu">
-        <button class="btn1" @click="DashBoard">Главная</button>
+        <button class="btn1" @click="navigateToDashBoard">Главная</button>
         <button class="btn1" @click="transferFromTo">Операции</button>
-        <button class="btn2" @click="payments">Платежи</button>
+        <button class="btn2" @click="payments">Перевести</button>
       </nav>
       <div class="user-name" v-if="user">
         <p style="padding-right: 6%;">{{ user.name }}</p>
@@ -72,6 +72,9 @@ export default {
           alert(error.response.data.error);
         }
       });
+    },
+    navigateToDashBoard() {
+      this.$router.push('/dashboard');
     }
   },
   created() {
