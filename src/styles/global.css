@@ -167,7 +167,7 @@ h1 {
 .logout-button{
   padding: 10px 15px;
   margin-right: 60px;
-  margin-top: 30%;
+  margin-top: 40%;
   background-color: #66c1fd;
   color: white;
   border-radius: 5px;
@@ -199,14 +199,99 @@ button:hover {
 }
 
 .btn3 {
-  margin-right: 100px;
+  flex-direction: column;
+  margin-left: -3%;
   margin-top: 8%;
-  color: #015aff;
+  color: #000000;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-color: none;
+  border: none;
+  font-size: 22px;
+  padding-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 50px;
+  border-radius: 15px;
+  text-align: left;
+  align-items: left;
+  justify-content:end;
+
+}
+
+.btn3 img {
+  width: 40px; /* Adjust image size as needed */
+  height: 40px; /* Adjust image size as needed */
+}
+.btn3 span {
+  margin-top: left;
+}
+
+.btn4 {
+  padding: 10px 15px;
+  margin-right: 60px;
+  margin-top: 40%;
+  background-color: #66c1fd;
+  color: white;
+  border-radius: 5px;
+  border-color: #66c1fd;
+  cursor: pointer;
+}
+
+.btn5 {
+  flex-direction: column;
+  margin-left: 3%;
+  margin-top: 8%;
+  color: #000000;
   cursor: pointer;
   background-color: #BDE3FF;
   border-color: none;
   border: none;
   font-size: 22px;
+  padding-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 50px;
+  border-radius: 15px;
+  text-align: left;
+  align-items: left;
+  justify-content:end;
+}
+
+.btn5 img {
+  width: 40px; /* Adjust image size as needed */
+  height: 40px; /* Adjust image size as needed */
+}
+.btn5 span {
+  margin-top: left;
+}
+
+.btn6 {
+  flex-direction: column;
+  margin-left: 3%;
+  margin-top: 8%;
+  color: #000000;
+  cursor: pointer;
+  background-color: #7ab8ff;
+  border-color: none;
+  border: none;
+  font-size: 22px;
+  padding-left: 64px;
+  padding-top: 40px;
+  padding-bottom: 43px;
+  padding-right: 60px;
+  border-radius: 15px;
+  text-align: left;
+  align-items: left;
+  justify-content:end;
+}
+
+.btn6 img {
+  width: 40px; /* Adjust image size as needed */
+  height: 40px; /* Adjust image size as needed */
+}
+.btn6 span {
+  margin-top: left;
 }
 
 .error {
@@ -237,14 +322,14 @@ button:hover {
 }
 
 .search-container input[type="text"] {
-  width: 50%;
-  padding: 10px;
+  width: 500%;
+  padding: 12px;
   box-sizing: border-box;
   border: 1px solid #ffffff;
   background-color: #3C3B3B;
   border-radius: 15px;
   margin-left: 400%;
-  margin-top: 1%;
+  margin-top: 30%;
   color: #fffefe;
 }
 
@@ -265,4 +350,21 @@ button:hover {
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 10%;
+}
+
+.reclama {
+  display: flex;
+  margin-top: 25%;
+  margin-left: -53%;
+  margin-right: 37%;
+  width: 10px;
+  height: 240px;
+}
+.photo {
+  margin-left: 55%;
+ margin-top: -39%;
+}
+.photo1 {
+  margin-left: 55%;
+ margin-top: -43%;
 }

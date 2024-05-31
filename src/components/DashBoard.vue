@@ -27,7 +27,7 @@
       {{ greeting }} {{ user.name }}
     </div>
 
-    <div class="container">
+        <div class="container">
       <div class="search-container">
         <input type="text" v-model="searchQuery" @input="search" placeholder="Поиск...">
       </div>
@@ -45,16 +45,30 @@
         <img src="@/assets/f7_money-rubl-circle-fill.png">
         <p style="padding-left: 50%;">{{ user.Balance }} ₽</p>
       </div>
-      <button @click="navigateToTransfer" class="button">Перевести</button>
       <button @click="logout" class="logout-button">Выход</button>
 
-      <button class="btn3" @click="DashBoard">Главная</button>
-    </div>
+      <button class="btn3" @click="navigateToTransfer">
+    <img src="@/assets/f7_phone-fill.png"><P></P>
+    Перевести по<p></p> номеру<p></p> телефона</button>
+  <button class="btn5" @click="DashBoard">
+    <img src="@/assets/ion_card.png"><P></P>
+    Перевести по<p></p> номеру<p></p>
+карты</button>
+  <button class="btn6" @click="DashBoard">
+    <img src="@/assets/entypo_back-in-time.png"><p></p>
+<p></p>
+<p></p>
+    История <p></p>переводов</button>
+
+    <div class="reclama">
+  <img src="@/assets/reclama2.png">
+</div>
 
     <div class="bottom-menu">
       <p></p>
     </div>
   </div>
+</div>
 </template>
 
 <script>
