@@ -16,9 +16,10 @@
               <label for="password">Password:</label>
               <input type="password" v-model="password" id="password" required>
             </div>
-            <button class="button" type="submit">Login</button>
+            <button class="button" type="submit">Войти</button>
+            <button class="button" @click="ToRegistration">Зарегестрироваться</button>
           </form>
-          <p v-if="error">{{ error }}</p>
+          <p class="error" v-if="error">{{ error }}</p>
         </div>
       </div>
     </div>
@@ -26,6 +27,7 @@
 
 <script>
 import axios from 'axios';
+import router from '@/router';
 
 export default {
   data() {
@@ -49,7 +51,11 @@ export default {
         console.error('Error during login:', error);
         this.error = 'Invalid phone number or password';
       });
-    }
+    },
+    
+    ToRegistration() {
+      router.push('/');
+    },
   }
 };
 </script>

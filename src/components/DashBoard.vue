@@ -109,8 +109,6 @@ export default {
         this.filteredResults = [];
         return;
       }
-
-      // Ваш код поиска
     },
     navigateToTransfer() {
       router.push('/transferFromTo');
