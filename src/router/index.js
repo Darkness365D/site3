@@ -3,6 +3,7 @@ import HelloWorld from '../components/HelloWorld.vue';
 import UserLogin from '../components/UserLogin.vue';
 import DashBoard from '../components/DashBoard.vue';
 import TransferFromTo from '../components/TransferFromTo.vue';
+import TransferPoKarte from '@/components/TransferPoKarte.vue';
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/transferFromTo',
     name: 'TransferFromTo',
     component: TransferFromTo
+  },
+  {
+    path: '/transferPoKarte',
+    name: 'TransferPoKarte',
+    component: TransferPoKarte
   }
 ];
 
@@ -33,7 +39,7 @@ const router = createRouter({
   routes
 });
 
-// // Проверка перед каждым переходом на маршрут
+// Проверка перед каждым переходом на маршрут
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const token = localStorage.getItem('token');

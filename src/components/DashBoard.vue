@@ -15,23 +15,20 @@
         <img src="@/assets/Frame 11.png" align="center">
       </div>
     </div>
-    <div style="padding-top: 150px;">
-
-    </div>
+    <div style="padding-top: 150px;"></div>
     <div class="text" style="padding-left: 5%" v-if="user">
       {{ greeting }} {{ user.name }}
     </div>
 
-        <div class="container">
+    <div class="container">
       <div class="search-container">
         <input type="text" v-model="searchQuery" @input="search" placeholder="Поиск...">
       </div>
-      <br>
-      <br>
+      <br><br>
       <div class="search-results">
-          <li v-for="(result, index) in filteredResults" :key="index">
-            <!-- Отобразите результаты поиска здесь -->
-          </li>
+        <li v-for="(result, index) in filteredResults" :key="index">
+          <!-- Отобразите результаты поиска здесь -->
+        </li>
       </div>
 
       <div class="card-form" v-if="user">
@@ -41,27 +38,30 @@
       <button @click="logout" class="logout-button">Выход</button>
 
       <button class="btn3" @click="navigateToTransfer">
-    <img src="@/assets/f7_phone-fill.png"><P></P>
-    Перевести по<p></p> номеру<p></p> телефона</button>
-  <button class="btn5" @click="DashBoard">
-    <img src="@/assets/ion_card.png"><P></P>
-    Перевести по<p></p> номеру<p></p>
-карты</button>
-  <button class="btn6" @click="DashBoard">
-    <img src="@/assets/entypo_back-in-time.png"><p></p>
-<p></p>
-<p></p>
-    История <p></p>переводов</button>
+        <img src="@/assets/f7_phone-fill.png">
+        <p></p>
+        Перевести по<p></p> номеру<p></p> телефона
+      </button>
+      <button class="btn5" @click="navigateToKarta">
+        <img src="@/assets/ion_card.png">
+        <p></p>
+        Перевести по<p></p> номеру<p></p> карты
+      </button>
+      <button class="btn6" @click="DashBoard">
+        <img src="@/assets/entypo_back-in-time.png">
+        <p></p>
+        История <p></p>переводов
+      </button>
 
-    <div class="reclama">
-  <img src="@/assets/reclama2.png">
-</div>
+      <div class="reclama">
+        <img src="@/assets/reclama2.png">
+      </div>
 
-    <div class="bottom-menu">
-      <p></p>
+      <div class="bottom-menu">
+        <p></p>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -96,7 +96,9 @@ export default {
       this.$axios.post('/logout')
         .then(response => {
           console.log(response.data.message);
-          router.push('/login');
+          this.$store.dispatch('logout'); // Обновляем состояние Vuex
+          localStorage.removeItem('token'); // Удаляем токен из локального хранилища
+          router.push('/login'); // Перенаправляем на страницу входа
         })
         .catch(error => {
           console.error('Ошибка при выходе из аккаунта', error);
@@ -112,9 +114,19 @@ export default {
     },
     navigateToTransfer() {
       router.push('/transferFromTo');
+    },
+    navigateToKarta() {
+      router.push('/transferPoKarte');
+    },
+    DashBoard() {
+      router.push('/dashboard');
+    },
+    transferFromTo() {
+      router.push('/operations');
     }
   }
 };
 </script>
 
 <style src="@/styles/global.css" scoped></style>
+  
