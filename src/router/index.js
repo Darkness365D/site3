@@ -4,6 +4,7 @@ import UserLogin from '../components/UserLogin.vue';
 import DashBoard from '../components/DashBoard.vue';
 import TransferFromTo from '../components/TransferFromTo.vue';
 import TransferPoKarte from '@/components/TransferPoKarte.vue';
+import HistoryPerevodov from '@/components/HistoryPerevodov.vue';
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/transferPoKarte',
     name: 'TransferPoKarte',
     component: TransferPoKarte
+  },
+  {
+    path: '/historyPerevodov',
+    name: 'HistoryPerevodov',
+    component: HistoryPerevodov
   }
 ];
 

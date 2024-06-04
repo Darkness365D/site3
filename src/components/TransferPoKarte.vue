@@ -44,7 +44,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      cardNumber: '', // Изменено на cardNumber
+      cardNumber: '',
       amount: 0
     };
   },
@@ -55,7 +55,7 @@ export default {
     transferMoney() {
       const token = localStorage.getItem('token');
       axios.post('http://localhost:3000/TransferPoKarte', {
-        cardNumber: this.cardNumber, // Изменено на cardNumber
+        cardNumber: this.cardNumber,
         amount: this.amount
       }, {
         headers: {

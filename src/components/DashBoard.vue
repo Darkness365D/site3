@@ -120,7 +120,7 @@ export default {
       router.push('/dashboard');
     },
     transferFromTo() {
-      router.push('/operations');
+      router.push('/historyPerevodov');
     }
   }
 };

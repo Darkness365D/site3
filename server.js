@@ -139,6 +139,35 @@ app.get('/me', authenticateToken, (req, res) => {
   });
 });
 
+//Api для получения истории переводов
+app.get('/transferHistory', authenticateToken, (req, res) => {
+  const userId = req.user.userId;
+
+  const query = `
+    SELECT 
+      t.id, t.dateSanding, t.transferAmount, t.recipientId
+    FROM KpTransfer t
+    WHERE t.transfererId = ? OR t.recipientId = ?
+    ORDER BY t.dateSanding DESC
+  `;
+
+  pool.query(query, [userId, userId], (error, results) => {
+    if (error) {
+      console.error('Ошибка при получении истории переводов:', error);
+      return res.status(500).send({ error: 'Что-то пошло не так при получении истории' });
+    }
+
+    const transfers = results.map(transfer => ({
+      id: transfer.id,
+      dateSanding: transfer.dateSanding,
+      transferAmount: transfer.transferAmount,
+      recipientId: transfer.recipientId,
+    }));
+
+    res.send({ transfers });
+  });
+});
+
 //API для перевода по карте
 app.post('/TransferPoKarte', authenticateToken, (req, res) => {
   const { cardNumber, amount } = req.body;
@@ -197,15 +226,32 @@ app.post('/TransferPoKarte', authenticateToken, (req, res) => {
                         return res.status(500).send({ error: 'Ошибка при обновлении баланса получателя' });
                       });
                     } else {
-                      connection.commit((err) => {
-                        if (err) {
+                      // Шаг 5: Сохранение истории перевода
+                      const transferHistory = {
+                        dateSanding: new Date(),
+                        transferAmount: amount,
+                        transfererId: senderId,
+                        recipientId: recipientId
+                      };
+
+                      connection.query('INSERT INTO KpTransfer SET ?', transferHistory, (error) => {
+                        if (error) {
                           connection.rollback(() => {
                             connection.release();
-                            return res.status(500).send({ error: 'Ошибка при подтверждении транзакции' });
+                            return res.status(500).send({ error: 'Ошибка при сохранении истории перевода' });
                           });
                         } else {
-                          connection.release();
-                          res.status(200).send({ message: 'Перевод выполнен успешно' });
+                          connection.commit((err) => {
+                            if (err) {
+                              connection.rollback(() => {
+                                connection.release();
+                                return res.status(500).send({ error: 'Ошибка при подтверждении транзакции' });
+                              });
+                            } else {
+                              connection.release();
+                              res.status(200).send({ message: 'Перевод выполнен успешно и сохранен в истории' });
+                            }
+                          });
                         }
                       });
                     }
@@ -220,7 +266,8 @@ app.post('/TransferPoKarte', authenticateToken, (req, res) => {
   });
 });
 
-//Api для перевода
+
+//Api для перевода по телефону
 app.post('/transferFromTo', authenticateToken, (req, res) => {
   const { phoneNumber, amount } = req.body;
   const senderId = req.user.userId;
@@ -278,15 +325,32 @@ app.post('/transferFromTo', authenticateToken, (req, res) => {
                         return res.status(500).send({ error: 'Ошибка при обновлении баланса получателя' });
                       });
                     } else {
-                      connection.commit((err) => {
-                        if (err) {
+                      // Шаг 5: Сохранение истории перевода
+                      const transferHistory = {
+                        dateSanding: new Date(),
+                        transferAmount: amount,
+                        transfererId: senderId,
+                        recipientId: recipientId
+                      };
+
+                      connection.query('INSERT INTO KpTransfer SET ?', transferHistory, (error) => {
+                        if (error) {
                           connection.rollback(() => {
                             connection.release();
-                            return res.status(500).send({ error: 'Ошибка при подтверждении транзакции' });
+                            return res.status(500).send({ error: 'Ошибка при сохранении истории перевода' });
                           });
                         } else {
-                          connection.release();
-                          res.status(200).send({ message: 'Перевод выполнен успешно' });
+                          connection.commit((err) => {
+                            if (err) {
+                              connection.rollback(() => {
+                                connection.release();
+                                return res.status(500).send({ error: 'Ошибка при подтверждении транзакции' });
+                              });
+                            } else {
+                              connection.release();
+                              res.status(200).send({ message: 'Перевод выполнен успешно и сохранен в истории' });
+                            }
+                          });
                         }
                       });
                     }
@@ -301,10 +365,10 @@ app.post('/transferFromTo', authenticateToken, (req, res) => {
   });
 });
 
+
 // API для выхода
-app.post('/logout', authenticateToken, (req, res) => {
-  const token = req.headers['authorization'];
-  blacklistedTokens.add(token);
+app.post('/logout', (req, res) => {
+  // Можно добавить дополнительную логику для выхода
   res.send({ message: 'Вы успешно вышли из аккаунта' });
 });
 
