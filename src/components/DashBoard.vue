@@ -22,17 +22,16 @@
     <div>
       <button @click="logout" class="logout-button">✖</button>
     </div>
-    <div class="container">
-      <div class="search-container">
-        <input type="text" v-model="searchQuery" @input="search" placeholder="Поиск...">
+    <div class="container_3">
+      <div class="currency-rates">
+        <ul class="currency-list">
+          <li v-for="(rate, currency) in filteredExchangeRates" :key="currency" class="currency-item">
+            {{ currency }}: {{ rate }}
+          </li>
+        </ul>
       </div>
-      <br><br>
-      <div class="search-results">
-        <li v-for="(result, index) in filteredResults" :key="index">
-          <!-- Отобразите результаты поиска здесь -->
-        </li>
-      </div>
-
+   </div>
+   <div class="container">
       <div class="card-form" v-if="user">
         <img src="@/assets/f7_money-rubl-circle-fill.png">
         <p style="padding-left: 50%;">{{ user.Balance }} ₽</p>
@@ -40,43 +39,43 @@
 
       <div class="conteiner1">
         <button class="btn3" @click="navigateToTransfer">
-      <img src="@/assets/f7_phone-fill.png"><P></P>
-      Перевести по<p></p> номеру<p></p> телефона</button>
-  
-    <button class="btn5" @click="navigateToKarta">
-      <img src="@/assets/ion_card.png"><P></P>
-      Перевести по<p></p> номеру<p></p>
-  карты</button>
-  
-    <button class="btn6" @click="transferFromTo">
-      <img src="@/assets/entypo_back-in-time.png"><p></p>
-      <p></p>
-      <br>
-      История <p></p>переводов</button>
-  </div>
+          <img src="@/assets/f7_phone-fill.png"><P></P>
+          Перевести по<p></p> номеру<p></p> телефона
+        </button>
+        <button class="btn5" @click="navigateToKarta">
+          <img src="@/assets/ion_card.png"><P></P>
+          Перевести по<p></p> номеру<p></p> карты
+        </button>
+        <button class="btn6" @click="transferFromTo">
+          <img src="@/assets/entypo_back-in-time.png"><p></p>
+          <p></p>
+          <br>
+          История <p></p>переводов
+        </button>
+      </div>
       <div class="reclama">
-    <img src="@/assets/reclama2.png">
+        <img src="@/assets/reclama2.png">
       </div>
     </div>
   </div>
   <div class="bottom-menu">
-  <ul>
-    <li>BanK</li>
-    <li>nzaskupin</li>
-    <li>89170700699</li>
-  </ul>
+    <ul>
+      <li>BanK</li>
+      <li>nzaskupin</li>
+      <li>89170700699</li>
+    </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import { mapGetters } from 'vuex';
 import router from '@/router';
 
 export default {
   data() {
     return {
-      searchQuery: '',
-      filteredResults: []
+      exchangeRates: {},
     };
   },
   computed: {
@@ -90,29 +89,46 @@ export default {
       } else {
         return 'Добрый вечер,';
       }
+    },
+    filteredExchangeRates() {
+      const relevantCurrencies = ['USD', 'EUR', 'RUB'];
+      let filteredRates = {};
+      for (let currency of relevantCurrencies) {
+        if (this.exchangeRates[currency]) {
+          filteredRates[currency] = this.exchangeRates[currency];
+        }
+      }
+      return filteredRates;
     }
   },
   created() {
     this.$store.dispatch('fetchUser');
+    this.fetchExchangeRates();
   },
   methods: {
     logout() {
       this.$axios.post('/logout')
         .then(response => {
           console.log(response.data.message);
-          this.$store.dispatch('logout'); // Обновляем состояние Vuex
-          localStorage.removeItem('token'); // Удаляем токен из локального хранилища
-          router.push('/login'); // Перенаправляем на страницу входа
+          this.$store.dispatch('logout');
+          localStorage.removeItem('token');
+          router.push('/login');
         })
         .catch(error => {
           console.error('Ошибка при выходе из аккаунта', error);
         });
     },
-    search() {
-      if (this.searchQuery.trim() === '') {
-        this.filteredResults = [];
-        return;
-      }
+    fetchExchangeRates() {
+      const apiKey = '963e1939cabb02f351541ab7'; // Замените на ваш ключ API
+      const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+
+      axios.get(apiUrl)
+        .then(response => {
+          this.exchangeRates = response.data.conversion_rates;
+        })
+        .catch(error => {
+          console.error('Ошибка при получении курсов валют', error);
+        });
     },
     navigateToTransfer() {
       router.push('/transferFromTo');
@@ -131,14 +147,14 @@ export default {
 </script>
 
 <style>
-  html { 
-    background: #3C3B3B no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
+html { 
+  background: #3C3B3B no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 </style>
 
 <style src="@/styles/global.css" scoped></style>
-  

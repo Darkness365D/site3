@@ -1,73 +1,128 @@
 <template>
-  <div>
-    <h1>История транзакций</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Дата</th>
-          <th>Сумма</th>
-          <th>Отправитель</th>
-          <th>Получатель</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="transaction in transactions" :key="transaction.id">
-          <td>{{ formatDate(transaction.dateSanding) }}</td>
-          <td>{{ transaction.transferAmount }}</td>
-          <td>{{ transaction.senderName }}</td>
-          <td>{{ transaction.recipientName }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</template>
-
-<script>
-import axios from 'axios';
-import moment from 'moment';
-
-export default {
-  data() {
-    return {
-      transactions: []
-    };
-  },
-  created() {
-    this.fetchTransactions();
-  },
-  methods: {
-    async fetchTransactions() {
-      try {
-        const token = localStorage.getItem('token'); // Предполагается, что токен хранится в localStorage
-        const response = await axios.get('http://localhost:3000/transactionHistory', {
-          headers: {
-            'Authorization': token
-          }
-        });
-        this.transactions = response.data;
-      } catch (error) {
-        console.error('Ошибка при получении истории транзакций:', error);
-      }
+  <div class="osnovnoe" style="background-color: #3C3B3B;">
+      <div class="top-menu">
+        <div class="name" align="left">
+          BanK
+          <img src="@/assets/naz.png" align="center">
+        </div>
+        <nav class="menu">
+          <button class="btn1" @click="DashBoard">Главная</button>
+          <button class="btn2" @click="transferFromTo">Операции</button>
+          <button class="btn1" @click="navigateToTransfer">Перевести</button>
+        </nav>
+        <div class="user-name" v-if="user">
+          <p style="padding-right: 6%;">{{ user.name }}</p>
+          <img src="@/assets/Frame 11.png" align="center">
+        </div>
+      </div>
+          <div style="padding-top: 150px;"></div>
+      <div class="text" style="padding-left: 5%" v-if="user">
+        {{ greeting }} 
+      </div>
+  <div class="nazvanie">История переводов</div>
+      </div>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="color:black">Дата</th>
+            <th style="color:black">Сумма</th>
+            <th style="color:black">Отправитель</th>
+            <th style="color:black">Получатель</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="transaction in transactions" :key="transaction.id">
+            <td>{{ formatDate(transaction.dateSanding) }}</td>
+            <td>{{ transaction.transferAmount }}</td>
+            <td>{{ transaction.senderName }}</td>
+            <td>{{ transaction.recipientName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+      <div class="bottom-menu">
+    <ul>
+      <li>BanK</li>
+      <li>nzaskupin</li>
+      <li>89170700699</li>
+    </ul>
+    </div>
+  </template>
+  
+  <script>
+  import { mapGetters } from 'vuex';
+  import axios from 'axios';
+  import moment from 'moment';
+  import router from '@/router';
+  
+  export default {
+    data() {
+      return {
+        transactions: []
+      };
     },
-    formatDate(date) {
-      return moment(date).format('HH:mm DD.MM.YYYY');
+    computed: {
+      ...mapGetters(['user'])
+    },
+    created() {
+      this.fetchTransactions();
+    },
+    methods: {
+      async fetchTransactions() {
+        try {
+          const token = localStorage.getItem('token'); // Предполагается, что токен хранится в localStorage
+          const response = await axios.get('http://localhost:3000/transactionHistory', {
+            headers: {
+              'Authorization': token
+            }
+          });
+          this.transactions = response.data;
+        } catch (error) {
+          console.error('Ошибка при получении истории транзакций:', error);
+        }
+      },
+      formatDate(date) {
+        return moment(date).format('HH:mm DD.MM.YYYY');
+      },
+      DashBoard() {
+        router.push('/dashboard');
+      },
+          navigateToTransfer() {
+        router.push('/transferFromTo');
+      }
     }
+  };
+  </script>
+  
+  <style scoped>
+  table {
+    width: 100%;
+    border-collapse: collapse;
   }
-};
-</script>
-
-<style scoped>
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-}
-
-th {
-  background-color: #f4f4f4;
-}
-</style>
+  
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  </style>
+  <style src="@/styles/global.css" scoped>
+  </style>

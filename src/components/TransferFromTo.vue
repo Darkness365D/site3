@@ -16,63 +16,82 @@
       </div>
     </div>
     <div style="padding-top: 150px;"></div>
-<div class="nazvanie">Перевести по номеру телефона</div>
-<div class="container">
-  <div class="search-container">
-    <input type="text" v-model="searchQuery" @input="search" placeholder="Поиск...">
-  </div>
-  <br>
-  <br>
-  <div class="search-results">
-      <li v-for="(result, index) in filteredResults" :key="index">
-        <!-- Отобразите результаты поиска здесь -->
-      </li>
-  </div>
 
-  <div class="card-form" v-if="user">
-    <img src="@/assets/f7_money-rubl-circle-fill.png">
-    <p style="padding-left: 50%;">{{ user.Balance }} ₽</p>
+    <div class="nazvanie">Перевод по номеру телефона</div>
+
+    <div class="container_3">
+      <div class="currency-rates">
+        <ul class="currency-list">
+          <li v-for="(rate, currency) in filteredExchangeRates" :key="currency" class="currency-item">
+            {{ currency }}: {{ rate }}
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <div class="container">
+      <div class="card-form" v-if="user">
+        <img src="@/assets/f7_money-rubl-circle-fill.png">
+        <p style="padding-left: 50%;">{{ user.Balance }} ₽</p>
+      </div>
+      <div class="container_4">
+      <form @submit.prevent="transferMoney">
+        <div class="perevod">
+          <label style="color: white">Номер телефона получателя</label><br>
+          <input class="vvod" type="text" v-model="phoneNumber" required><br>
+        </div>
+        <div class="sum">
+          <input placeholder="От 1 ₽ до 200 000 000 ₽" style="color: white" class="vvod_1" type="text" v-model="amount" required><br>
+        </div>
+        <button class="btn7" type="submit">Отправить</button>
+      </form>
     </div>
-  <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <form @submit.prevent="transferMoney">
-      <div class="perevod">
-      <label style="color: white">Номер телефона получателя</label><br>
-      <input class="vvod" type="text" v-model="phoneNumber" required><br></div>
-      <div class="sum">
-      <input placeholder="От 1  ₽ до 200 000 000 ₽" style="color: white" class="vvod_1" type="text" v-model="amount" required ><br></div>
-      <button class="btn7" type="submit">Отправить</button>
-    </form>
   </div>
-<div class="bottom-menu">
-<ul>
-  <li>BanK</li>
-  <li>nzaskupin</li>
-  <li>88005553535</li>
-</ul>
 </div>
+    <div class="bottom-menu">
+      <ul>
+        <li>BanK</li>
+        <li>nzaskupin</li>
+        <li>88005553535</li>
+      </ul>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import axios from 'axios';
+import router from '@/router';
 
 export default {
   data() {
     return {
       phoneNumber: '',
-      amount: null
+      amount: null,
+      exchangeRates: {}
     };
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
+    greeting() {
+      const currentHour = new Date().getHours();
+      if (currentHour < 12) {
+        return 'Доброе утро,';
+      } else if (currentHour < 18) {
+        return 'Добрый день,';
+      } else {
+        return 'Добрый вечер,';
+      }
+    },
+    filteredExchangeRates() {
+      const relevantCurrencies = ['USD', 'EUR', 'RUB'];
+      let filteredRates = {};
+      for (let currency of relevantCurrencies) {
+        if (this.exchangeRates[currency]) {
+          filteredRates[currency] = this.exchangeRates[currency];
+        }
+      }
+      return filteredRates;
+    }
   },
   methods: {
     transferMoney() {
@@ -98,15 +117,30 @@ export default {
     },
     navigateToDashBoard() {
       this.$router.push('/dashboard');
+    },
+    transferFromTo() {
+      router.push('/historyPerevodov');
+    },
+    fetchExchangeRates() {
+      const apiKey = '963e1939cabb02f351541ab7'; // Замените на ваш ключ API
+      const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+
+      axios.get(apiUrl)
+        .then(response => {
+          this.exchangeRates = response.data.conversion_rates;
+        })
+        .catch(error => {
+          console.error('Ошибка при получении курсов валют', error);
+        });
     }
   },
   created() {
     if (!this.user) {
       this.$store.dispatch('fetchUser');
     }
+    this.fetchExchangeRates();
   }
 };
 </script>
 
-<style src="@/styles/global.css" scoped>
-</style>
+<style src="@/styles/global.css" scoped></style>

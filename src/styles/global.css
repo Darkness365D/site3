@@ -149,8 +149,8 @@ h1 {
 .card-form {
   margin-top: 5%;
   margin-left: -2%;
-  width: 300px;
-  height: 150px;
+  width: 387px;
+  height: 200px;
   border: 1px solid;
   border-radius: 10px;
   border-color: #f9f9f9;
@@ -353,34 +353,47 @@ gap: 10%;
 
 }
 .fon {
-  /* height: 1080px;
-  width: 1920px; */
   color: #3C3B3B;
   margin: 0;
 }
-
-
-
-.search-container input[type="text"] {
-  width: 500%;
-  padding: 12px;
-  box-sizing: border-box;
-  border: 1px solid #ffffff;
-  background-color: #3C3B3B;
-  border-radius: 15px;
-  margin-left: 300%;
-  margin-top: 30%;
-  color: #fffefe;
+.container_3 {
+  margin-top: 0%;
+  margin-left: 40%;
+  margin-right: 10%;
+  background-color:#3C3B3B ;
 }
 
-.search-results {
-  color: #015aff;
+.currency-rates {
+  text-align: center;
+  color: rgb(26, 18, 18);
+}
+
+.currency-list {
+  border: #ffffff solid 1px;
+  border-radius: 20px;
+  list-style: none;
+  padding: 0;
+  background-color: #3C3B3B;
+}
+
+.currency-item {
+  color: white;
+  background-color: 3C3B3B;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .container {
   display: flex; /* Делаем контейнер флексбоксом */
   align-items:flex-start; /* Выравниваем элементы по центру по вертикали */
+  padding-left: 12%;
+  margin-top: -7%
+}
 
+.table {
+  margin-top: -7%;
+  color:#ffffff;
 }
 
 .container_for_regAndLog{
@@ -396,8 +409,7 @@ gap: 10%;
   display: flex;
   align-items: normal;
   margin-top: 30%;
-  margin-left: -42%;
-  
+  margin-left: -45%;
   width: 10px;
   height: 240px;
 }
@@ -432,30 +444,29 @@ gap: 10%;
   border: 1px solid #fffefe;
   border-radius: 20px;
   background-color:#3C3B3Bf9;
-  margin-top: -12%;
-  margin-left:40%;
+  margin-right: -80%;
 }
 
 .sum {
-  margin-top: 10%;
-  margin-left: 6%;
   background-color: #3C3B3B;
   color: #ffffff;
   border-bottom: #ffffff;
+  margin-top: 40%;
+  margin-left: 14%;
 }
 
 .btn7 {
-  margin-left: 6%;
-  margin-top: 5%;
+  margin-left: 13%;
+  margin-top: 40%;
   background-color:#6bbdf8;
   border: 7px solid #6bbdf8;
   border-radius: 15px;
   font-size: 25px;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 60%;
+  padding-right: 60%;
 }
 .vvod {
-  margin-top: 5%;
+
   padding-top: 1%;
   padding-bottom: 1%;
   border: 1px solid #fffefe;
@@ -471,7 +482,7 @@ gap: 10%;
 } 
 
 .vvod_1 {
-  margin-top: -30%;
+
   padding-top: 1%;
   padding-bottom: 1%;
   outline-width: 0;
@@ -486,3 +497,10 @@ gap: 10%;
   color: #ffffff;
 } 
 
+.container_4 {
+  margin-top: 12%;
+  margin-left: 10%;
+  padding-right: 30%;
+  padding-left: 10%;
+  max-width: 1000px;
+}
