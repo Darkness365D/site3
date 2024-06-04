@@ -3,6 +3,21 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #3C3B3B;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.fon {
+  background-attachment: fixed;
+  background-color: #3C3B3B;
+  width: 1920px;
+  max-width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .osnovnoe{
@@ -12,14 +27,41 @@ html, body {
   top: 0; /* Располагаем его в верхней части страницы */
   left: 0; /* Располагаем его по левому краю */
   margin-top: 0;
+  padding-bottom: 10%;
 }
 
 .bottom-menu {
-  height: 100px;
-  width: auto;
+  position: fixed;
+  height: 150px;
   background-color: #BDE3FF;
   margin: 0;
   position: relative;
+  justify-content:end;
+  background: #BDE3FF no-repeat bottom  bottom fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  max-width: 100%;
+}
+
+ul {
+  /* Добавим фоновый цвет для нашего меню */
+  background:#BDE3FF;
+  /* Выставим высоту */
+  height: 100px;
+  /* Уберем точки у li элементов */
+  list-style-type: none;
+  /* добавим отступ, чтобы крайние значения меню не были прижаты в плотную к границам меню */
+  padding: 30px;
+  /* Используем flexbox */  
+  display: flex;
+  justify-content: center;
+  /* Дополнительно сделаем вертикальное выравнивание */
+  align-items: center;
+  padding-left: 3%;
+  gap: 10%;
+  color: #3C3B3B;
 }
 
 .top-menu {
@@ -87,6 +129,7 @@ body::before {
   content: "";
   display: inline-block;
   height: 100px; /* Высота равна высоте меню */
+  width: 3000px;
 }
 
 h1 {
@@ -94,7 +137,6 @@ h1 {
 }
 
 .registration-form {
-  
   max-width: 400px;
   margin: 0 auto;
   padding: 30px;
@@ -119,7 +161,6 @@ h1 {
   padding-top: 10px; /* Отступ сверху */
   color: #ffffff;
 }
-
 
 
 .login-form {
@@ -166,11 +207,11 @@ h1 {
 
 .logout-button{
   padding: 10px 15px;
-  margin-right: 60px;
-  margin-top: 40%;
+  margin-left: 1700px;
+  margin-top: -5%;
   background-color: #66c1fd;
   color: white;
-  border-radius: 5px;
+  border-radius: 50%;
   border-color: #66c1fd;
   cursor: pointer;
 }
@@ -198,20 +239,25 @@ button:hover {
   font-size: 22px;
 }
 
+.conteiner1 {
+display: flex;
+margin-top: 10%;
+margin-left: 10%;
+gap: 10%;
+}
+
 .btn3 {
   flex-direction: column;
-  margin-left: -3%;
-  margin-top: 8%;
   color: #000000;
   cursor: pointer;
   background-color: #ffffff;
   border-color: none;
   border: none;
   font-size: 22px;
-  padding-left: 50px;
+  padding-left: 60px;
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-right: 50px;
+  padding-right: 60px;
   border-radius: 15px;
   text-align: left;
   align-items: left;
@@ -240,18 +286,16 @@ button:hover {
 
 .btn5 {
   flex-direction: column;
-  margin-left: 3%;
-  margin-top: 8%;
   color: #000000;
   cursor: pointer;
   background-color: #BDE3FF;
   border-color: none;
   border: none;
   font-size: 22px;
-  padding-left: 50px;
+  padding-left: 60px;
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-right: 50px;
+  padding-right: 60px;
   border-radius: 15px;
   text-align: left;
   align-items: left;
@@ -268,17 +312,15 @@ button:hover {
 
 .btn6 {
   flex-direction: column;
-  margin-left: 3%;
-  margin-top: 8%;
   color: #000000;
   cursor: pointer;
-  background-color: #7ab8ff;
+  background-color: #6bbdf8;
   border-color: none;
   border: none;
   font-size: 22px;
-  padding-left: 64px;
-  padding-top: 40px;
-  padding-bottom: 43px;
+  padding-left: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-right: 60px;
   border-radius: 15px;
   text-align: left;
@@ -353,8 +395,8 @@ button:hover {
 .reclama {
   display: flex;
   align-items: normal;
-  margin-top: 25%;
-  margin-left: -45%;
+  margin-top: 30%;
+  margin-left: -42%;
   
   width: 10px;
   height: 240px;
@@ -367,3 +409,80 @@ button:hover {
   margin-left: 55%;
  margin-top: -43%;
 }
+
+.image {
+  display: flex;
+  margin-left: 70%;
+  margin-top: -40%;
+}
+
+.nazvanie {
+  margin-top: 0%;
+  margin-right: 60%;
+  font-size: 40px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.perevod {
+  max-width: 440px;
+  height: 100px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #fffefe;
+  border-radius: 20px;
+  background-color:#3C3B3Bf9;
+  margin-top: -12%;
+  margin-left:40%;
+}
+
+.sum {
+  margin-top: 10%;
+  margin-left: 6%;
+  background-color: #3C3B3B;
+  color: #ffffff;
+  border-bottom: #ffffff;
+}
+
+.btn7 {
+  margin-left: 6%;
+  margin-top: 5%;
+  background-color:#6bbdf8;
+  border: 7px solid #6bbdf8;
+  border-radius: 15px;
+  font-size: 25px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.vvod {
+  margin-top: 5%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border: 1px solid #fffefe;
+  border-radius: 15px;
+  background-color:#fffffff9;
+  justify-items: center;
+  align-items: left;
+  font-size: 20px;
+  padding-left: 15%;
+  padding-right: 15%;
+  text-align: center;
+
+} 
+
+.vvod_1 {
+  margin-top: -30%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  outline-width: 0;
+  border: 0;
+  border-bottom: 1px solid #ffffff;
+  background-color:#3C3B3B;
+  justify-items: center;
+  align-items: left;
+  font-size: 19px;
+  padding-right: 15%;
+  text-align: left;
+  color: #ffffff;
+} 
+

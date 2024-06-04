@@ -15,6 +15,26 @@
         <img src="@/assets/Frame 11.png" align="center">
       </div>
     </div>
+    <div style="padding-top: 150px;"></div>
+<div class="nazvanie">Перевести по номеру телефона</div>
+<div class="container">
+  <div class="search-container">
+    <input type="text" v-model="searchQuery" @input="search" placeholder="Поиск...">
+  </div>
+  <br>
+  <br>
+  <div class="search-results">
+      <li v-for="(result, index) in filteredResults" :key="index">
+        <!-- Отобразите результаты поиска здесь -->
+      </li>
+  </div>
+
+  <div class="card-form" v-if="user">
+    <img src="@/assets/f7_money-rubl-circle-fill.png">
+    <p style="padding-left: 50%;">{{ user.Balance }} ₽</p>
+    </div>
+    </div>
+  <br>
     <br>
     <br>
     <br>
@@ -22,19 +42,22 @@
     <br>
     <br>
     <br>
-    <br>
-    <h2>Перевод средств</h2>
     <form @submit.prevent="transferMoney">
-      <label>Номер телефона получателя:</label><br>
-      <input type="text" v-model="phoneNumber" required><br>
-      <label>Сумма:</label><br>
-      <input type="text" v-model="amount" required><br>
-      <button type="submit">Отправить</button>
+      <div class="perevod">
+      <label style="color: white">Номер телефона получателя</label><br>
+      <input class="vvod" type="text" v-model="phoneNumber" required><br></div>
+      <div class="sum">
+      <input placeholder="От 1  ₽ до 200 000 000 ₽" style="color: white" class="vvod_1" type="text" v-model="amount" required ><br></div>
+      <button class="btn7" type="submit">Отправить</button>
     </form>
   </div>
-  <div class="bottom-menu">
-    <p></p>
-  </div>
+<div class="bottom-menu">
+<ul>
+  <li>BanK</li>
+  <li>nzaskupin</li>
+  <li>88005553535</li>
+</ul>
+</div>
 </template>
 
 <script>
@@ -45,7 +68,7 @@ export default {
   data() {
     return {
       phoneNumber: '',
-      amount: 0
+      amount: null
     };
   },
   computed: {

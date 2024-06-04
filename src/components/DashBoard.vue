@@ -1,5 +1,5 @@
 <template>
-  <div class="osnovnoe" style="background-color: #3C3B3B;">
+  <div class="osnovnoe">
     <div class="top-menu">
       <div class="name" align="left">
         BanK
@@ -19,7 +19,9 @@
     <div class="text" style="padding-left: 5%" v-if="user">
       {{ greeting }} {{ user.name }}
     </div>
-
+    <div>
+      <button @click="logout" class="logout-button">✖</button>
+    </div>
     <div class="container">
       <div class="search-container">
         <input type="text" v-model="searchQuery" @input="search" placeholder="Поиск...">
@@ -35,32 +37,34 @@
         <img src="@/assets/f7_money-rubl-circle-fill.png">
         <p style="padding-left: 50%;">{{ user.Balance }} ₽</p>
       </div>
-      <button @click="logout" class="logout-button">Выход</button>
 
-      <button class="btn3" @click="navigateToTransfer">
-        <img src="@/assets/f7_phone-fill.png">
-        <p></p>
-        Перевести по<p></p> номеру<p></p> телефона
-      </button>
-      <button class="btn5" @click="navigateToKarta">
-        <img src="@/assets/ion_card.png">
-        <p></p>
-        Перевести по<p></p> номеру<p></p> карты
-      </button>
-      <button class="btn6" @click="DashBoard">
-        <img src="@/assets/entypo_back-in-time.png">
-        <p></p>
-        История <p></p>переводов
-      </button>
-
+      <div class="conteiner1">
+        <button class="btn3" @click="navigateToTransfer">
+      <img src="@/assets/f7_phone-fill.png"><P></P>
+      Перевести по<p></p> номеру<p></p> телефона</button>
+  
+    <button class="btn5" @click="navigateToKarta">
+      <img src="@/assets/ion_card.png"><P></P>
+      Перевести по<p></p> номеру<p></p>
+  карты</button>
+  
+    <button class="btn6" @click="transferFromTo">
+      <img src="@/assets/entypo_back-in-time.png"><p></p>
+      <p></p>
+      <br>
+      История <p></p>переводов</button>
+  </div>
       <div class="reclama">
-        <img src="@/assets/reclama2.png">
-      </div>
-
-      <div class="bottom-menu">
-        <p></p>
+    <img src="@/assets/reclama2.png">
       </div>
     </div>
+  </div>
+  <div class="bottom-menu">
+  <ul>
+    <li>BanK</li>
+    <li>nzaskupin</li>
+    <li>89170700699</li>
+  </ul>
   </div>
 </template>
 
@@ -125,6 +129,16 @@ export default {
   }
 };
 </script>
+
+<style>
+  html { 
+    background: #3C3B3B no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+</style>
 
 <style src="@/styles/global.css" scoped></style>
   

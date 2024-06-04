@@ -22,7 +22,10 @@
           <p class="error" v-if="error">{{ error }}</p>
         </div>
       </div>
-    </div>
+      <div class="image">
+        <img src="@/assets/Group 2215.png" align="right">
+      </div>
+  </div>
 </template>
 
 <script>

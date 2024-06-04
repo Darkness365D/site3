@@ -58,7 +58,9 @@
     </form>
   </div>
    </div>
-   
+   <div class="image">
+    <img src="@/assets/Group 2215.png" align="right">
+    </div>
 </div>
 </template>
 
