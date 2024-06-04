@@ -139,34 +139,35 @@ app.get('/me', authenticateToken, (req, res) => {
   });
 });
 
-//Api для получения истории переводов
-app.get('/transferHistory', authenticateToken, (req, res) => {
+// API для получения истории транзакций текущего пользователя (с аутентификацией)
+app.get('/transactionHistory', authenticateToken, (req, res) => {
   const userId = req.user.userId;
 
   const query = `
     SELECT 
-      t.id, t.dateSanding, t.transferAmount, t.recipientId
-    FROM KpTransfer t
-    WHERE t.transfererId = ? OR t.recipientId = ?
-    ORDER BY t.dateSanding DESC
+      KpTransfer.dateSanding, 
+      KpTransfer.transferAmount, 
+      KpTransfer.transfererId, 
+      KpTransfer.recipientId,
+      sender.name as senderName,
+      recipient.name as recipientName
+    FROM KpTransfer
+    JOIN KpUser sender ON KpTransfer.transfererId = sender.id
+    JOIN KpUser recipient ON KpTransfer.recipientId = recipient.id
+    WHERE KpTransfer.transfererId = ? OR KpTransfer.recipientId = ?
+    ORDER BY KpTransfer.dateSanding DESC
   `;
 
   pool.query(query, [userId, userId], (error, results) => {
     if (error) {
-      console.error('Ошибка при получении истории переводов:', error);
-      return res.status(500).send({ error: 'Что-то пошло не так при получении истории' });
+      console.error('Ошибка при получении истории транзакций:', error);
+      return res.status(500).send({ error: 'Что-то пошло не так при получении истории транзакций' });
     }
 
-    const transfers = results.map(transfer => ({
-      id: transfer.id,
-      dateSanding: transfer.dateSanding,
-      transferAmount: transfer.transferAmount,
-      recipientId: transfer.recipientId,
-    }));
-
-    res.send({ transfers });
+    res.send(results);
   });
 });
+
 
 //API для перевода по карте
 app.post('/TransferPoKarte', authenticateToken, (req, res) => {

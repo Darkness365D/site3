@@ -1,77 +1,73 @@
 <template>
-  <div class="history-container">
-    <h2>История операций</h2>
-
-    <ul class="operations-list">
-      <li v-for="operation in history" :key="operation.id">
-        <div class="operation-item">
-          <p class="operation-date">{{ operation.dateSanding }}</p>
-          <p class="operation-amount">{{ operation.transferAmount }} ₽</p>
-          <p class="operation-recipient">{{ operation.recipientId }}</p>
-        </div>
-      </li>
-    </ul>
+  <div>
+    <h1>История транзакций</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Дата</th>
+          <th>Сумма</th>
+          <th>Отправитель</th>
+          <th>Получатель</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="transaction in transactions" :key="transaction.id">
+          <td>{{ formatDate(transaction.dateSanding) }}</td>
+          <td>{{ transaction.transferAmount }}</td>
+          <td>{{ transaction.senderName }}</td>
+          <td>{{ transaction.recipientName }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
+import moment from 'moment';
 
 export default {
   data() {
     return {
-      history: [],
+      transactions: []
     };
   },
-  computed: {
-    ...mapGetters(['user']),
-  },
-  mounted() {
-    this.fetchHistory();
+  created() {
+    this.fetchTransactions();
   },
   methods: {
-    fetchHistory() {
-      axios.get('/transferHistory')
-        .then(response => {
-          this.history = response.data.transfers;
-        })
-        .catch(error => {
-          console.error('Ошибка при получении истории операций:', error);
+    async fetchTransactions() {
+      try {
+        const token = localStorage.getItem('token'); // Предполагается, что токен хранится в localStorage
+        const response = await axios.get('http://localhost:3000/transactionHistory', {
+          headers: {
+            'Authorization': token
+          }
         });
+        this.transactions = response.data;
+      } catch (error) {
+        console.error('Ошибка при получении истории транзакций:', error);
+      }
     },
-  },
+    formatDate(date) {
+      return moment(date).format('HH:mm DD.MM.YYYY');
+    }
+  }
 };
 </script>
 
 <style scoped>
-.history-container {
-  padding: 20px;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.operations-list {
-  list-style: none;
-  padding: 0;
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
 }
 
-.operation-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-}
-
-.operation-date {
-  font-weight: bold;
-}
-
-.operation-amount {
-  color: #333;
-}
-
-.operation-recipient {
-  font-style: italic;
+th {
+  background-color: #f4f4f4;
 }
 </style>
