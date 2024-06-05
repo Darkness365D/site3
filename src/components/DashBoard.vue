@@ -58,11 +58,11 @@
       </div>
     </div>
   </div>
-  <div class="bottom-menu">
-    <ul>
+  <div class="bottom-menu"> 
+    <ul> 
       <li>BanK</li>
-      <li>nzaskupin</li>
       <li>89170700699</li>
+      <li>nzaskupin@gmail.com</li>
     </ul>
   </div>
 </template>

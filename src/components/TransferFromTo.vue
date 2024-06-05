@@ -52,8 +52,8 @@
     <div class="bottom-menu">
       <ul>
         <li>BanK</li>
+        <li>89170700699</li>
         <li>nzaskupin</li>
-        <li>88005553535</li>
       </ul>
   </div>
 </template>
