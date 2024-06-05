@@ -38,7 +38,7 @@
         <form @submit.prevent="transferMoney">
           <div class="perevod">
             <label style="color: white">Номер карты получателя</label><br>
-            <input class="vvod" type="text" v-model="phoneNumber" required><br>
+            <input class="vvod" type="text" v-model="cardNumber" required><br>
           </div>
           <div class="sum">
             <input placeholder="От 1 ₽ до 200 000 000 ₽" style="color: white" class="vvod_1" type="text" v-model="amount" required><br>
@@ -48,6 +48,7 @@
       </div>
     </div>
   </div>
+  </div>
     <div class="bottom-menu">
       <ul>
         <li>BanK</li>
@@ -55,7 +56,7 @@
         <li>88005553535</li>
       </ul>
     </div>
-  </div>
+  
 </template>
 
 
