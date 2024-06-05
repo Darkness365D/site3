@@ -38,7 +38,8 @@
         <form @submit.prevent="transferMoney">
           <div class="perevod">
             <label style="color: white">Номер карты получателя</label><br>
-            <input class="vvod" type="text" v-model="cardNumber" required><br>
+            <input class="vvod" type="text" v-model="cardNumber" @input="fetchRecipientName" required><br>
+            <p v-if="recipientName" style="color: white">Получатель: {{ recipientName }}</p>
           </div>
           <div class="sum">
             <input placeholder="От 1 ₽ до 200 000 000 ₽" style="color: white" class="vvod_1" type="text" v-model="amount" required><br>
@@ -56,9 +57,7 @@
         <li>88005553535</li>
       </ul>
     </div>
-  
 </template>
-
 
 <script>
 import { mapGetters } from 'vuex';
@@ -68,9 +67,10 @@ import router from '@/router';
 export default {
   data() {
     return {
-      phoneNumber: '',
+      cardNumber: '',
       amount: null,
       exchangeRates: {},
+      recipientName: '',
     };
   },
   computed: {
@@ -108,6 +108,25 @@ export default {
           }
         });
     },
+    fetchRecipientName() {
+      if (this.cardNumber.length >= 16) {
+        const token = localStorage.getItem('token');
+        axios.get(`http://localhost:3000/getRecipientName/${this.cardNumber}`, {
+          headers: {
+            'Authorization': token
+          }
+        })
+          .then(response => {
+            this.recipientName = response.data.name + ' ' + response.data.surname;
+          })
+          .catch(error => {
+            console.error('Ошибка при получении имени получателя:', error);
+            this.recipientName = '';
+          });
+      } else {
+        this.recipientName = '';
+      }
+    },
     navigateToDashBoard() {
       this.$router.push('/dashboard');
     },
@@ -134,7 +153,6 @@ export default {
     this.fetchExchangeRates();
   }
 };
-
 </script>
 
 <style src="@/styles/global.css" scoped>

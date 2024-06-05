@@ -38,7 +38,8 @@
       <form @submit.prevent="transferMoney">
         <div class="perevod">
           <label style="color: white">Номер телефона получателя</label><br>
-          <input class="vvod" type="text" v-model="phoneNumber" required><br>
+          <input class="vvod" type="text" v-model="phoneNumber" @input="fetchRecipientName" required><br>
+          <p v-if="recipientName" style="color: white">Получатель: {{ recipientName }}</p>
         </div>
         <div class="sum">
           <input placeholder="От 1 ₽ до 200 000 000 ₽" style="color: white" class="vvod_1" type="text" v-model="amount" required><br>
@@ -67,7 +68,8 @@ export default {
     return {
       phoneNumber: '',
       amount: null,
-      exchangeRates: {}
+      exchangeRates: {},
+      recipientName: '',
     };
   },
   computed: {
@@ -114,6 +116,25 @@ export default {
           alert(error.response.data.error);
         }
       });
+    },
+    fetchRecipientName() {
+      if (this.phoneNumber.length >= 10) {
+        const token = localStorage.getItem('token');
+        axios.get(`http://localhost:3000/getRecipientNameByPhone/${this.phoneNumber}`, {
+          headers: {
+            'Authorization': token
+          }
+        })
+        .then(response => {
+          this.recipientName = response.data.name + ' ' + response.data.surname;
+        })
+        .catch(error => {
+          console.error('Ошибка при получении имени получателя:', error);
+          this.recipientName = '';
+        });
+      } else {
+        this.recipientName = '';
+      }
     },
     navigateToDashBoard() {
       this.$router.push('/dashboard');

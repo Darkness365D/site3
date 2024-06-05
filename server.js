@@ -267,6 +267,24 @@ app.post('/TransferPoKarte', authenticateToken, (req, res) => {
   });
 });
 
+// API для получения имени и фамилии по номеру карты
+app.get('/getRecipientName/:cardNumber', authenticateToken, (req, res) => {
+  const { cardNumber } = req.params;
+
+  pool.query('SELECT KpUser.name, KpUser.surname FROM KpUser JOIN KpAccount ON KpUser.id = KpAccount.userId WHERE KpAccount.cardNumber = ?', [cardNumber], (error, results) => {
+    if (error) {
+      console.error('Ошибка при получении данных получателя:', error);
+      return res.status(500).send({ error: 'Ошибка сервера' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send({ error: 'Получатель не найден' });
+    }
+
+    const recipient = results[0];
+    res.send({ name: recipient.name, surname: recipient.surname });
+  });
+});
 
 //Api для перевода по телефону
 app.post('/transferFromTo', authenticateToken, (req, res) => {
@@ -366,6 +384,24 @@ app.post('/transferFromTo', authenticateToken, (req, res) => {
   });
 });
 
+// API для получения имени и фамилии по номеру телефона
+app.get('/getRecipientNameByPhone/:phoneNumber', authenticateToken, (req, res) => {
+  const { phoneNumber } = req.params;
+
+  pool.query('SELECT KpUser.name, KpUser.surname FROM KpUser JOIN KpAccount ON KpUser.id = KpAccount.userId WHERE KpUser.phoneNumber = ?', [phoneNumber], (error, results) => {
+    if (error) {
+      console.error('Ошибка при получении данных получателя:', error);
+      return res.status(500).send({ error: 'Ошибка сервера' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send({ error: 'Получатель не найден' });
+    }
+
+    const recipient = results[0];
+    res.send({ name: recipient.name, surname: recipient.surname });
+  });
+});
 
 // API для выхода
 app.post('/logout', (req, res) => {
