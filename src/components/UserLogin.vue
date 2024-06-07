@@ -6,14 +6,14 @@
       </div>
       <div style="padding-bottom: 30%;">
         <div class="registration-form">
-          <h1>Login</h1>
+          <h1>Вход</h1>
           <form @submit.prevent="login">
             <div class="form-group">
-              <label for="phoneNumber">Phone Number:</label>
+              <label for="phoneNumber">Номер Телефона:</label>
               <input type="text" v-model="phoneNumber" id="phoneNumber" required>
             </div>
             <div class="form-group">
-              <label for="password">Password:</label>
+              <label for="password">Пароль:</label>
               <input type="password" v-model="password" id="password" required>
             </div>
             <button class="button" type="submit">Войти</button>
