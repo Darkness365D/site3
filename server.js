@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
-
+const path = require('path');
 const app = express();
 
 const pool = mysql.createPool({
@@ -15,9 +15,14 @@ const pool = mysql.createPool({
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'dist')));
 
 const secretKey = 'ваш_секретный_ключ'; // Замените на ваш секретный ключ
 const blacklistedTokens = new Set(); // Черный список токенов
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 // Middleware для проверки токена
 const authenticateToken = (req, res, next) => {
